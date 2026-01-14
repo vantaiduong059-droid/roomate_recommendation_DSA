@@ -1,0 +1,101 @@
+ID,Name,School_Code,School_Full_Name,Gender,Budget,Sleep_Time,Cleanliness,Personality,Pet,Latitude,Longitude
+S001,Student_1,NEU,National Economics University,Female,2676055,23.1,7,0,1,21.010477,105.856299
+S002,Student_2,UET,VNU University of Engineering and Technology,Male,3887365,23.5,5,0,1,21.033052,105.789852
+S003,Student_3,UET,VNU University of Engineering and Technology,Female,3920051,25.1,9,0,0,21.044179,105.792163
+S004,Student_4,UET,VNU University of Engineering and Technology,Female,5744646,25.3,9,1,0,21.044903,105.781776
+S005,Student_5,HUST,Hanoi University of Science and Technology,Female,2861691,24.3,6,0,0,21.019491,105.814598
+S006,Student_6,FTU,Foreign Trade University,Female,3526542,25.8,8,1,1,21.019312,105.831687
+S007,Student_7,PTIT,Posts and Telecommunications Institute of Technology,Female,2750497,22.8,5,1,1,20.964251,105.818301
+S008,Student_8,FTU,Foreign Trade University,Female,3202459,24.6,9,0,0,21.019307,105.806144
+S009,Student_9,HUST,Hanoi University of Science and Technology,Male,3272269,23.0,4,1,1,21.000008,105.840666
+S010,Student_10,NEU,National Economics University,Male,4130518,22.1,9,1,0,20.994757,105.841308
+S011,Student_11,HUST,Hanoi University of Science and Technology,Female,3095519,24.1,5,0,1,20.996813,105.82473
+S012,Student_12,GTVT,University of Transport and Communications,Female,3117201,23.2,10,1,0,21.058717,105.812783
+S013,Student_13,VNU,"Vietnam National University, Hanoi",Female,3201868,24.3,4,1,0,21.02363,105.808252
+S014,Student_14,FTU,Foreign Trade University,Male,5418555,25.7,8,0,1,21.027596,105.835725
+S015,Student_15,FTU,Foreign Trade University,Female,3570575,23.0,9,1,0,21.02392,105.810653
+S016,Student_16,ULIS,University of Languages and International Studies,Male,3612406,22.7,9,0,1,21.020211,105.771798
+S017,Student_17,VNU,"Vietnam National University, Hanoi",Female,4364511,24.7,5,1,1,21.020394,105.790909
+S018,Student_18,ULIS,University of Languages and International Studies,Male,2899162,24.6,8,0,1,21.012066,105.808543
+S019,Student_19,FTU,Foreign Trade University,Male,5923432,22.8,6,0,1,21.03398,105.776193
+S020,Student_20,UET,VNU University of Engineering and Technology,Male,2647061,23.6,10,0,1,21.019639,105.793194
+S021,Student_21,VNU,"Vietnam National University, Hanoi",Female,3586098,24.1,8,0,0,21.066313,105.789801
+S022,Student_22,ULIS,University of Languages and International Studies,Female,4919865,23.9,9,1,1,21.039469,105.814054
+S023,Student_23,GTVT,University of Transport and Communications,Male,3066158,23.1,7,1,1,21.047476,105.811878
+S024,Student_24,NEU,National Economics University,Male,4685614,26.0,10,1,0,20.996648,105.843161
+S025,Student_25,NEU,National Economics University,Male,4717924,25.9,10,0,1,20.996315,105.850581
+S026,Student_26,NEU,National Economics University,Male,5890391,23.0,10,0,0,20.983649,105.875564
+S027,Student_27,NEU,National Economics University,Female,2756784,22.4,5,0,0,21.030634,105.825977
+S028,Student_28,ULIS,University of Languages and International Studies,Male,2571505,22.4,6,0,1,21.0297,105.790887
+S029,Student_29,HUST,Hanoi University of Science and Technology,Female,4077732,22.9,9,1,1,21.014972,105.859402
+S030,Student_30,ULIS,University of Languages and International Studies,Male,3615349,24.2,7,1,0,21.069625,105.798805
+S031,Student_31,GTVT,University of Transport and Communications,Male,4534828,23.9,8,1,0,21.042606,105.836737
+S032,Student_32,ULIS,University of Languages and International Studies,Male,4226212,24.6,8,0,1,21.041927,105.779421
+S033,Student_33,PTIT,Posts and Telecommunications Institute of Technology,Male,3839426,25.2,10,0,0,20.963724,105.784575
+S034,Student_34,VNU,"Vietnam National University, Hanoi",Female,4455102,24.0,10,1,0,21.060652,105.781029
+S035,Student_35,FTU,Foreign Trade University,Female,3494542,24.6,10,0,1,21.040131,105.790577
+S036,Student_36,ULIS,University of Languages and International Studies,Female,3670251,23.5,9,1,1,21.04241,105.786963
+S037,Student_37,FTU,Foreign Trade University,Female,3263859,22.6,10,1,1,21.02607,105.82437
+S038,Student_38,UET,VNU University of Engineering and Technology,Female,3520208,24.3,6,0,0,21.035841,105.814792
+S039,Student_39,HUST,Hanoi University of Science and Technology,Female,4065470,22.2,7,1,1,20.974538,105.850354
+S040,Student_40,NEU,National Economics University,Female,5978335,22.6,10,0,1,21.007439,105.844064
+S041,Student_41,HUST,Hanoi University of Science and Technology,Male,3485628,25.7,7,0,1,21.01341,105.860563
+S042,Student_42,HUST,Hanoi University of Science and Technology,Female,5083918,22.2,7,0,0,21.024922,105.833449
+S043,Student_43,UET,VNU University of Engineering and Technology,Female,3194979,25.7,9,0,1,21.064421,105.782994
+S044,Student_44,HUST,Hanoi University of Science and Technology,Male,5190154,24.0,4,0,1,21.003561,105.837528
+S045,Student_45,HUST,Hanoi University of Science and Technology,Male,3520489,23.5,4,0,1,21.009921,105.840745
+S046,Student_46,HUST,Hanoi University of Science and Technology,Female,5102154,22.7,9,0,0,21.001904,105.875431
+S047,Student_47,ULIS,University of Languages and International Studies,Male,5953986,25.2,9,1,1,21.044453,105.770675
+S048,Student_48,PTIT,Posts and Telecommunications Institute of Technology,Male,3076560,22.3,7,0,0,20.994813,105.758181
+S049,Student_49,PTIT,Posts and Telecommunications Institute of Technology,Male,4769789,22.9,9,0,1,20.995233,105.764666
+S050,Student_50,HUST,Hanoi University of Science and Technology,Male,4482073,25.4,7,1,1,20.987943,105.834191
+S051,Student_51,GTVT,University of Transport and Communications,Female,5378471,22.4,5,1,1,21.033475,105.84087
+S052,Student_52,FTU,Foreign Trade University,Female,5494694,24.9,10,1,1,21.051375,105.806949
+S053,Student_53,VNU,"Vietnam National University, Hanoi",Female,3476573,24.8,9,0,1,21.05092,105.796526
+S054,Student_54,HUST,Hanoi University of Science and Technology,Male,4709910,22.6,6,0,1,21.002052,105.861937
+S055,Student_55,ULIS,University of Languages and International Studies,Female,4926981,24.3,7,1,1,21.051571,105.796297
+S056,Student_56,PTIT,Posts and Telecommunications Institute of Technology,Female,4541735,25.1,10,1,1,20.963855,105.818868
+S057,Student_57,NEU,National Economics University,Male,4298401,24.0,7,1,1,20.990543,105.83902
+S058,Student_58,NEU,National Economics University,Female,3821552,25.1,10,1,1,21.009079,105.865692
+S059,Student_59,NEU,National Economics University,Male,4531127,25.8,9,1,1,20.994096,105.852303
+S060,Student_60,HUST,Hanoi University of Science and Technology,Female,3694070,22.0,6,1,0,21.000223,105.845271
+S061,Student_61,GTVT,University of Transport and Communications,Male,5817634,24.2,8,1,0,21.021346,105.859301
+S062,Student_62,GTVT,University of Transport and Communications,Female,3039853,25.3,9,1,0,21.044526,105.863048
+S063,Student_63,NEU,National Economics University,Female,2800275,24.7,8,0,1,21.017114,105.839362
+S064,Student_64,FTU,Foreign Trade University,Female,4457283,22.8,8,0,0,21.039474,105.809916
+S065,Student_65,GTVT,University of Transport and Communications,Female,3310317,24.0,4,1,1,21.018982,105.826708
+S066,Student_66,HUST,Hanoi University of Science and Technology,Female,4467460,24.5,6,1,1,20.998508,105.861039
+S067,Student_67,FTU,Foreign Trade University,Female,4138819,23.0,9,1,1,21.020768,105.800722
+S068,Student_68,VNU,"Vietnam National University, Hanoi",Female,3940323,25.8,4,1,0,21.012086,105.783282
+S069,Student_69,GTVT,University of Transport and Communications,Female,5879715,25.2,6,1,0,21.033642,105.847074
+S070,Student_70,UET,VNU University of Engineering and Technology,Female,3479881,24.1,8,0,0,21.005456,105.770042
+S071,Student_71,GTVT,University of Transport and Communications,Female,3971225,23.4,8,0,0,21.016782,105.850474
+S072,Student_72,VNU,"Vietnam National University, Hanoi",Female,4916849,24.1,7,1,0,21.040115,105.776125
+S073,Student_73,FTU,Foreign Trade University,Male,4436419,26.0,8,1,1,21.004974,105.795865
+S074,Student_74,GTVT,University of Transport and Communications,Male,3415972,23.5,8,0,0,21.055665,105.840708
+S075,Student_75,UET,VNU University of Engineering and Technology,Male,5640607,25.1,7,0,1,21.04192,105.771666
+S076,Student_76,ULIS,University of Languages and International Studies,Female,3474777,25.1,4,1,1,21.025086,105.792778
+S077,Student_77,GTVT,University of Transport and Communications,Female,3818418,24.6,8,1,0,21.044901,105.840892
+S078,Student_78,ULIS,University of Languages and International Studies,Male,5045539,25.7,6,0,0,21.044989,105.774347
+S079,Student_79,GTVT,University of Transport and Communications,Male,3749265,23.8,5,1,1,21.048766,105.821217
+S080,Student_80,NEU,National Economics University,Male,5378183,24.9,9,0,1,20.96886,105.845163
+S081,Student_81,GTVT,University of Transport and Communications,Female,4442703,23.0,9,0,0,21.05572,105.830306
+S082,Student_82,FTU,Foreign Trade University,Male,4121467,24.8,4,1,1,21.029156,105.805757
+S083,Student_83,ULIS,University of Languages and International Studies,Female,5056398,22.8,6,1,1,21.050167,105.787415
+S084,Student_84,PTIT,Posts and Telecommunications Institute of Technology,Female,3973767,25.4,7,1,1,21.00005,105.802425
+S085,Student_85,NEU,National Economics University,Male,5986219,25.2,10,1,0,20.98641,105.847135
+S086,Student_86,ULIS,University of Languages and International Studies,Male,5383950,25.6,4,0,1,21.048881,105.774998
+S087,Student_87,NEU,National Economics University,Female,3070240,24.3,10,1,1,20.992412,105.854712
+S088,Student_88,UET,VNU University of Engineering and Technology,Female,5533088,22.4,6,0,1,21.029921,105.806463
+S089,Student_89,PTIT,Posts and Telecommunications Institute of Technology,Male,3973579,25.9,10,1,0,20.988882,105.772419
+S090,Student_90,UET,VNU University of Engineering and Technology,Female,3495967,24.4,5,0,0,21.041082,105.788034
+S091,Student_91,HUST,Hanoi University of Science and Technology,Female,4821948,23.4,5,0,0,21.032429,105.862693
+S092,Student_92,VNU,"Vietnam National University, Hanoi",Female,2706281,24.9,8,0,0,21.028671,105.756175
+S093,Student_93,HUST,Hanoi University of Science and Technology,Male,3784157,23.4,6,0,0,21.016557,105.822908
+S094,Student_94,GTVT,University of Transport and Communications,Male,5510339,24.4,4,1,0,21.013449,105.83596
+S095,Student_95,FTU,Foreign Trade University,Female,4982225,22.2,5,1,0,21.028418,105.775848
+S096,Student_96,UET,VNU University of Engineering and Technology,Male,2975811,24.6,9,1,1,21.012257,105.784569
+S097,Student_97,NEU,National Economics University,Female,5024413,22.5,9,0,1,20.994162,105.872137
+S098,Student_98,HUST,Hanoi University of Science and Technology,Female,3860963,22.4,4,0,0,21.004544,105.832864
+S099,Student_99,FTU,Foreign Trade University,Female,3020638,22.4,9,0,1,21.020531,105.836938
+S100,Student_100,PTIT,Posts and Telecommunications Institute of Technology,Male,5515764,22.2,9,0,0,20.994021,105.784862
