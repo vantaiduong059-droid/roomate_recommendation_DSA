@@ -1,234 +1,185 @@
-{
- "cells": [
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "fa459285-fd8a-4fea-98e1-40c6afda8df5",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "=== NHẬP THÔNG TIN NGƯỜI DÙNG ===\n"
-     ]
+import csv
+import math
+
+# =========================
+# HÀM CHUẨN HÓA
+# =========================
+def norm_diff(a, b, max_val):
+    """
+    Chuẩn hóa độ chênh lệch về [0,1]
+    """
+    return abs(a - b) / max_val if max_val != 0 else 0
+
+
+def binary_diff(a, b):
+    """
+    So sánh tiêu chí nhị phân (giống = 0, khác = 1)
+    """
+    return 0 if a == b else 1
+
+
+# =========================
+# TÍNH KHOẢNG CÁCH ĐỊA LÝ
+# =========================
+def haversine(lat1, lon1, lat2, lon2):
+    R = 6371  # km
+    lat1, lon1, lat2, lon2 = map(math.radians,
+                                 [lat1, lon1, lat2, lon2])
+
+    dlat = lat2 - lat1
+    dlon = lon2 - lon1
+
+    a = (math.sin(dlat / 2) ** 2 +
+         math.cos(lat1) * math.cos(lat2) *
+         math.sin(dlon / 2) ** 2)
+
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+    return R * c
+
+
+# =========================
+# LOAD CSV
+# =========================
+# def load_students(csv_path):
+#     students = []
+#     with open(csv_path, newline='', encoding='utf-8') as f:
+#         reader = csv.DictReader(f)
+#         for row in reader:
+#             students.append({
+#                 "id": row["ID"],
+#                 "name": row["Name"],
+#                 "school": row["School"],
+#                 "budget": float(row["Budget"]),
+#                 "sleep": float(row["Sleep_Time"]),
+#                 "personality": int(row["Personality"]),  # 0/1
+#                 "pet": int(row["Pet"]),                  # 0/1
+#                 "clean": float(row["Cleanliness"]),      # 1–10
+#                 "lat": float(row["Latitude"]),
+#                 "lon": float(row["Longitude"])
+#             })
+#     return students
+def load_students(csv_path):
+    students = []
+    with open(csv_path, newline='', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            students.append({
+                "id": row["ID"],
+                "name": row["Name"],
+                "school": row["School_Full_Name"],   # ← sửa
+                "budget": float(row["Budget"]),
+                "sleep": float(row["Sleep_Time"]),  # ← sửa
+                "personality": int(row["Personality"]),
+                "pet": int(row["Pet"]),
+                "clean": float(row["Cleanliness"]),
+                "lat": float(row["Latitude"]),
+                "lon": float(row["Longitude"])
+            })
+    return students
+
+
+# =========================
+# TÍNH WEIGHT (ĐỘ KHÔNG PHÙ HỢP)
+# =========================
+def calculate_weight(user, s, alpha,
+                     max_budget, max_sleep, max_clean):
+
+    weight = 0
+
+    # Trường học
+    weight += alpha["school"] * binary_diff(user["school"], s["school"])
+
+    # Budget (phòng rẻ hơn budget → không bị phạt)
+    if s["budget"] <= user["budget"]:
+        budget_diff = 0
+    else:
+        budget_diff = norm_diff(s["budget"], user["budget"], max_budget)
+
+    weight += alpha["budget"] * budget_diff
+
+    # Giờ ngủ
+    weight += alpha["sleep"] * norm_diff(user["sleep"], s["sleep"], max_sleep)
+
+    # Độ sạch sẽ
+    weight += alpha["clean"] * norm_diff(user["clean"], s["clean"], max_clean)
+
+    # Tính cách
+    weight += alpha["personality"] * binary_diff(
+        user["personality"], s["personality"]
+    )
+
+    # Nuôi thú cưng
+    weight += alpha["pet"] * binary_diff(user["pet"], s["pet"])
+
+    return weight
+
+
+# =========================
+# RANKING (CÓ HARD DISTANCE)
+# =========================
+def rank_students(user, students, alpha, max_distance):
+    results = []
+
+    max_budget = max(s["budget"] for s in students)
+    max_sleep = 24
+    max_clean = 10
+
+    for s in students:
+        dist = haversine(
+            user["lat"], user["lon"],
+            s["lat"], s["lon"]
+        )
+
+        # HARD DISTANCE CONSTRAINT
+        if dist > max_distance:
+            continue
+
+        w = calculate_weight(user, s, alpha,
+                              max_budget, max_sleep, max_clean)
+
+        results.append((s, round(w, 4), round(dist, 2)))
+
+    results.sort(key=lambda x: x[1])
+    return results
+
+
+# =========================
+# MAIN
+# =========================
+def main():
+    print("=== NHẬP THÔNG TIN NGƯỜI DÙNG ===")
+    user = {
+        "school": input("Trường học: "),
+        "budget": float(input("Ngân sách tối đa: ")),
+        "sleep": float(input("Giờ ngủ (vd 23.5): ")),
+        "personality": int(input("Hướng nội(0) / Hướng ngoại(1): ")),
+        "pet": int(input("Nuôi thú cưng? Không(0) / Có(1): ")),
+        "clean": float(input("Mức độ sạch sẽ (1–10): ")),
+        "lat": float(input("Vĩ độ: ")),
+        "lon": float(input("Kinh độ: "))
     }
-   ],
-   "source": [
-    "import csv\n",
-    "import math\n",
-    "\n",
-    "# =========================\n",
-    "# HÀM CHUẨN HÓA\n",
-    "# =========================\n",
-    "def norm_diff(a, b, max_val):\n",
-    "    \"\"\"\n",
-    "    Chuẩn hóa độ chênh lệch về [0,1]\n",
-    "    \"\"\"\n",
-    "    return abs(a - b) / max_val if max_val != 0 else 0\n",
-    "\n",
-    "\n",
-    "def binary_diff(a, b):\n",
-    "    \"\"\"\n",
-    "    So sánh tiêu chí nhị phân (giống = 0, khác = 1)\n",
-    "    \"\"\"\n",
-    "    return 0 if a == b else 1\n",
-    "\n",
-    "\n",
-    "# =========================\n",
-    "# TÍNH KHOẢNG CÁCH ĐỊA LÝ\n",
-    "# =========================\n",
-    "def haversine(lat1, lon1, lat2, lon2):\n",
-    "    R = 6371  # km\n",
-    "    lat1, lon1, lat2, lon2 = map(math.radians,\n",
-    "                                 [lat1, lon1, lat2, lon2])\n",
-    "\n",
-    "    dlat = lat2 - lat1\n",
-    "    dlon = lon2 - lon1\n",
-    "\n",
-    "    a = (math.sin(dlat / 2) ** 2 +\n",
-    "         math.cos(lat1) * math.cos(lat2) *\n",
-    "         math.sin(dlon / 2) ** 2)\n",
-    "\n",
-    "    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))\n",
-    "    return R * c\n",
-    "\n",
-    "\n",
-    "# =========================\n",
-    "# LOAD CSV\n",
-    "# =========================\n",
-    "# def load_students(csv_path):\n",
-    "#     students = []\n",
-    "#     with open(csv_path, newline='', encoding='utf-8') as f:\n",
-    "#         reader = csv.DictReader(f)\n",
-    "#         for row in reader:\n",
-    "#             students.append({\n",
-    "#                 \"id\": row[\"ID\"],\n",
-    "#                 \"name\": row[\"Name\"],\n",
-    "#                 \"school\": row[\"School\"],\n",
-    "#                 \"budget\": float(row[\"Budget\"]),\n",
-    "#                 \"sleep\": float(row[\"Sleep_Time\"]),\n",
-    "#                 \"personality\": int(row[\"Personality\"]),  # 0/1\n",
-    "#                 \"pet\": int(row[\"Pet\"]),                  # 0/1\n",
-    "#                 \"clean\": float(row[\"Cleanliness\"]),      # 1–10\n",
-    "#                 \"lat\": float(row[\"Latitude\"]),\n",
-    "#                 \"lon\": float(row[\"Longitude\"])\n",
-    "#             })\n",
-    "#     return students\n",
-    "def load_students(csv_path):\n",
-    "    students = []\n",
-    "    with open(csv_path, newline='', encoding='utf-8') as f:\n",
-    "        reader = csv.DictReader(f)\n",
-    "        for row in reader:\n",
-    "            students.append({\n",
-    "                \"id\": row[\"ID\"],\n",
-    "                \"name\": row[\"Name\"],\n",
-    "                \"school\": row[\"School_Full_Name\"],   # ← sửa\n",
-    "                \"budget\": float(row[\"Budget\"]),\n",
-    "                \"sleep\": float(row[\"Sleep_Time\"]),  # ← sửa\n",
-    "                \"personality\": int(row[\"Personality\"]),\n",
-    "                \"pet\": int(row[\"Pet\"]),\n",
-    "                \"clean\": float(row[\"Cleanliness\"]),\n",
-    "                \"lat\": float(row[\"Latitude\"]),\n",
-    "                \"lon\": float(row[\"Longitude\"])\n",
-    "            })\n",
-    "    return students\n",
-    "\n",
-    "\n",
-    "# =========================\n",
-    "# TÍNH WEIGHT (ĐỘ KHÔNG PHÙ HỢP)\n",
-    "# =========================\n",
-    "def calculate_weight(user, s, alpha,\n",
-    "                     max_budget, max_sleep, max_clean):\n",
-    "\n",
-    "    weight = 0\n",
-    "\n",
-    "    # Trường học\n",
-    "    weight += alpha[\"school\"] * binary_diff(user[\"school\"], s[\"school\"])\n",
-    "\n",
-    "    # Budget (phòng rẻ hơn budget → không bị phạt)\n",
-    "    if s[\"budget\"] <= user[\"budget\"]:\n",
-    "        budget_diff = 0\n",
-    "    else:\n",
-    "        budget_diff = norm_diff(s[\"budget\"], user[\"budget\"], max_budget)\n",
-    "\n",
-    "    weight += alpha[\"budget\"] * budget_diff\n",
-    "\n",
-    "    # Giờ ngủ\n",
-    "    weight += alpha[\"sleep\"] * norm_diff(user[\"sleep\"], s[\"sleep\"], max_sleep)\n",
-    "\n",
-    "    # Độ sạch sẽ\n",
-    "    weight += alpha[\"clean\"] * norm_diff(user[\"clean\"], s[\"clean\"], max_clean)\n",
-    "\n",
-    "    # Tính cách\n",
-    "    weight += alpha[\"personality\"] * binary_diff(\n",
-    "        user[\"personality\"], s[\"personality\"]\n",
-    "    )\n",
-    "\n",
-    "    # Nuôi thú cưng\n",
-    "    weight += alpha[\"pet\"] * binary_diff(user[\"pet\"], s[\"pet\"])\n",
-    "\n",
-    "    return weight\n",
-    "\n",
-    "\n",
-    "# =========================\n",
-    "# RANKING (CÓ HARD DISTANCE)\n",
-    "# =========================\n",
-    "def rank_students(user, students, alpha, max_distance):\n",
-    "    results = []\n",
-    "\n",
-    "    max_budget = max(s[\"budget\"] for s in students)\n",
-    "    max_sleep = 24\n",
-    "    max_clean = 10\n",
-    "\n",
-    "    for s in students:\n",
-    "        dist = haversine(\n",
-    "            user[\"lat\"], user[\"lon\"],\n",
-    "            s[\"lat\"], s[\"lon\"]\n",
-    "        )\n",
-    "\n",
-    "        # HARD DISTANCE CONSTRAINT\n",
-    "        if dist > max_distance:\n",
-    "            continue\n",
-    "\n",
-    "        w = calculate_weight(user, s, alpha,\n",
-    "                              max_budget, max_sleep, max_clean)\n",
-    "\n",
-    "        results.append((s, round(w, 4), round(dist, 2)))\n",
-    "\n",
-    "    results.sort(key=lambda x: x[1])\n",
-    "    return results\n",
-    "\n",
-    "\n",
-    "# =========================\n",
-    "# MAIN\n",
-    "# =========================\n",
-    "def main():\n",
-    "    print(\"=== NHẬP THÔNG TIN NGƯỜI DÙNG ===\")\n",
-    "    user = {\n",
-    "        \"school\": input(\"Trường học: \"),\n",
-    "        \"budget\": float(input(\"Ngân sách tối đa: \")),\n",
-    "        \"sleep\": float(input(\"Giờ ngủ (vd 23.5): \")),\n",
-    "        \"personality\": int(input(\"Hướng nội(0) / Hướng ngoại(1): \")),\n",
-    "        \"pet\": int(input(\"Nuôi thú cưng? Không(0) / Có(1): \")),\n",
-    "        \"clean\": float(input(\"Mức độ sạch sẽ (1–10): \")),\n",
-    "        \"lat\": float(input(\"Vĩ độ: \")),\n",
-    "        \"lon\": float(input(\"Kinh độ: \"))\n",
-    "    }\n",
-    "\n",
-    "    print(\"\\n=== NHẬP TRỌNG SỐ ƯU TIÊN ===\")\n",
-    "    alpha = {\n",
-    "        \"school\": float(input(\"Ưu tiên cùng trường: \")),\n",
-    "        \"budget\": float(input(\"Ưu tiên giá rẻ: \")),\n",
-    "        \"sleep\": float(input(\"Ưu tiên giờ ngủ: \")),\n",
-    "        \"clean\": float(input(\"Ưu tiên sạch sẽ: \")),\n",
-    "        \"personality\": float(input(\"Ưu tiên tính cách: \")),\n",
-    "        \"pet\": float(input(\"Ưu tiên thú cưng: \"))\n",
-    "    }\n",
-    "\n",
-    "    max_distance = float(input(\"\\nKhoảng cách tối đa chấp nhận (km): \"))\n",
-    "\n",
-    "    students = load_students(\"students_sample.csv\")\n",
-    "\n",
-    "    ranked = rank_students(user, students, alpha, max_distance)\n",
-    "\n",
-    "    print(\"\\n=== SINH VIÊN PHÙ HỢP NHẤT ===\")\n",
-    "    for s, w, d in ranked[:5]:\n",
-    "        print(f\"{s['name']} | weight={w} | distance={d} km\")\n",
-    "\n",
-    "\n",
-    "if __name__ == \"__main__\":\n",
-    "    main()\n"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "67ac2ac0-98ae-4c2a-878c-b5fc09a65289",
-   "metadata": {},
-   "outputs": [],
-   "source": []
-  }
- ],
- "metadata": {
-  "kernelspec": {
-   "display_name": "Python 3 (ipykernel)",
-   "language": "python",
-   "name": "python3"
-  },
-  "language_info": {
-   "codemirror_mode": {
-    "name": "ipython",
-    "version": 3
-   },
-   "file_extension": ".py",
-   "mimetype": "text/x-python",
-   "name": "python",
-   "nbconvert_exporter": "python",
-   "pygments_lexer": "ipython3",
-   "version": "3.13.5"
-  }
- },
- "nbformat": 4,
- "nbformat_minor": 5
-}
+
+    print("\n=== NHẬP TRỌNG SỐ ƯU TIÊN ===")
+    alpha = {
+        "school": float(input("Ưu tiên cùng trường: ")),
+        "budget": float(input("Ưu tiên giá rẻ: ")),
+        "sleep": float(input("Ưu tiên giờ ngủ: ")),
+        "clean": float(input("Ưu tiên sạch sẽ: ")),
+        "personality": float(input("Ưu tiên tính cách: ")),
+        "pet": float(input("Ưu tiên thú cưng: "))
+    }
+
+    max_distance = float(input("\nKhoảng cách tối đa chấp nhận (km): "))
+
+    students = load_students("students_sample.csv")
+
+    ranked = rank_students(user, students, alpha, max_distance)
+
+    print("\n=== SINH VIÊN PHÙ HỢP NHẤT ===")
+    for s, w, d in ranked[:5]:
+        print(f"{s['name']} | weight={w} | distance={d} km")
+
+
+if __name__ == "__main__":
+    main()
+
