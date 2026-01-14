@@ -40,24 +40,6 @@ def haversine(lat1, lon1, lat2, lon2):
 # =========================
 # LOAD CSV
 # =========================
-# def load_students(csv_path):
-#     students = []
-#     with open(csv_path, newline='', encoding='utf-8') as f:
-#         reader = csv.DictReader(f)
-#         for row in reader:
-#             students.append({
-#                 "id": row["ID"],
-#                 "name": row["Name"],
-#                 "school": row["School"],
-#                 "budget": float(row["Budget"]),
-#                 "sleep": float(row["Sleep_Time"]),
-#                 "personality": int(row["Personality"]),  # 0/1
-#                 "pet": int(row["Pet"]),                  # 0/1
-#                 "clean": float(row["Cleanliness"]),      # 1–10
-#                 "lat": float(row["Latitude"]),
-#                 "lon": float(row["Longitude"])
-#             })
-#     return students
 def load_students(csv_path):
     students = []
     with open(csv_path, newline='', encoding='utf-8') as f:
